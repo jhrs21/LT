@@ -15,6 +15,7 @@ require_once (sfConfig::get('sf_lib_dir') . '/vendor/terawurfl/TeraWurfl.php');
 class sfGuardAuthActions extends BasesfGuardAuthActions {
 
     public function executeLogin(sfWebRequest $request) {
+        // error_log("HOOLLLLAAA\n",3,"/var/tmp/error-custom-lt.log");
         if ($viewTraditional = $request->getParameter('vt', false)) {
             $this->getUser()->setAttribute('view_traditional', true);
         }
@@ -72,6 +73,9 @@ class sfGuardAuthActions extends BasesfGuardAuthActions {
                         $result = array('success' => 0, 'error' => array('code' => '', 'message' => ''));
                         $result['error']['code'] = '00000';
                     }
+                }else{
+                    $result = array('success' => 0, 'error' => array('code' => '', 'message' => ''));
+                    $result['error']['code'] = '00000'; 
                 }
                 // FIN DE CODIGO PARA SUSTITUIR AL BUHO
 

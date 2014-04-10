@@ -970,7 +970,7 @@ class api2Actions extends baseEpApiActions {
             return 'Error';
         } else if ($membershipCardId) {
             if (!$user = $this->validateMembershipCardForTag($membershipCardId, $asset, $email)) {
-                error_log("saliendo por error en el MembershipCard $membershipCardId\n",3,"/var/tmp/error-email-lt.log");
+                error_log("saliendo por error en el MembershipCard $membershipCardId (PUEDE SER: por usuario con 2 tarjetas) en $asset\n",3,"/var/tmp/error-email-lt.log");
                 return 'Error';
             }
             $tagSource = 'tablet_card';
