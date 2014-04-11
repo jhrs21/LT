@@ -31,9 +31,18 @@
         <div class="main-canvas-subtitle darkgray">
             <?php echo __("¡Es hora de comenzar a obtener premios! Registra tu primer Tag") ?>
         </div>
-        <div id="register-tag-form-container" class="form-container">
-            <?php include_partial('tagForm',array('form' => $form))?>
+        <div class="main-canvas-subtitle darkgray">
+            <?php echo __("¡Es hora de comenzar a obtener premios! Registra tu primer Tag") ?>
         </div>
+        <div class="main-canvas-subtitle darkgray">
+            <?php echo __("¡Es hora de comenzar a obtener premios! Registra tu primer Tag") ?>
+        </div>
+        <div class="main-canvas-subtitle darkgray">
+            <?php echo __("¡Es hora de comenzar a obtener premios! Registra tu primer Tag") ?>
+        </div>
+        <!-- <div id="register-tag-form-container" class="form-container">
+            <?php include_partial('tagForm',array('form' => $form))?>
+        </div> -->
         <div class="lt-corner lt-corner-small lt-corner-small-tl"></div>
         <div class="lt-corner lt-corner-big lt-corner-big-br"></div>
     </div>
