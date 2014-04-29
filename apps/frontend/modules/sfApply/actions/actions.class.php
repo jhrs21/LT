@@ -18,6 +18,7 @@ require_once(sfConfig::get('sf_plugins_dir') . '/sfDoctrineApplyPlugin/modules/s
 class sfApplyActions extends BasesfApplyActions {
 
     public function executeApply(sfRequest $request) {
+        // error_log("\nentrando"." - ".date("Y-m-d H:i:s")."\n",3, "/var/tmp/debug-lt.log");
         $this->form = $this->newForm('sfApplyApplyForm');
         if ($viewTraditional = $request->getParameter('vt', false)) {
             $this->getUser()->setAttribute('view_traditional', true);
@@ -451,7 +452,7 @@ class sfApplyActions extends BasesfApplyActions {
 
     public function executeResetRequest(sfRequest $request) {
         $user = $this->getUser();
-
+        
         if ($viewTraditional = $request->getParameter('vt', false)) {
             $this->getUser()->setAttribute('view_traditional', true);
         }
@@ -467,7 +468,7 @@ class sfApplyActions extends BasesfApplyActions {
             $guardUser = $this->getUser()->getGuardUser();
 
             $this->forward404Unless($guardUser);
-
+            //error_log("\nPASO POR AQUI"." - ".date("Y-m-d H:i:s")."\n",3, "/var/tmp/debug-lt.log");die;
             return $this->resetRequestBody($guardUser);
         } else {
             $this->form = $this->newForm('sfApplyResetRequestForm');
@@ -523,12 +524,12 @@ class sfApplyActions extends BasesfApplyActions {
                 return 'NoSuchUser';
             }
         }
-
+        
         $profile = $user->getUserProfile();
-
+        
         if (!$user->getIsActive()) {
             $type = self::getValidationType($profile->getValidate());
-
+            
             if ($type === 'New') {
                 try {
                     $this->sendVerificationMail($profile);
@@ -548,10 +549,11 @@ class sfApplyActions extends BasesfApplyActions {
 
         $buhoValues['user'] = $user->getHash();
         //$buhoValues['email'] = $user->getEmailAddress();
-
+        
         $buho = new epBuhoApi();
         #$result = $buho->buhoResetPassword($buhoValues);
-        $result = array("success"=>1);
+        $validator = strtolower(Util::GenSecret(32,0));
+        $result = array("success"=>1, "user" => array("validator"=>$validator));
 
         if (!$result['success']) {
             $this->error = $result['error']; //errors debe ser un array
