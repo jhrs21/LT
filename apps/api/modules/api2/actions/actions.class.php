@@ -199,7 +199,7 @@ class api2Actions extends baseEpApiActions {
         // CODIGO PARA SUSTITUIR AL BUHO
         $userObj = Doctrine::getTable('sfGuardUser')->findOneBy('email_address', $email);
         if ($userObj) {
-            // var_dump(sha1($userObj->getSalt().$password) == $userObj->getPassword());die();
+            //var_dump(sha1($userObj->getSalt().$password) == $userObj->getPassword());die();
             if (sha1($userObj->getSalt().$password) == $userObj->getPassword()){
                 $result['success'] = 1;
                 $result = array(
@@ -211,14 +211,17 @@ class api2Actions extends baseEpApiActions {
                         "info" => array()
                     ));
                 if ( !$userObj->getIsActive() ) {
+                    error_log("\n IsActive()"."\n",3, "/var/tmp/bug-lt.log");
                     $result = array('success' => 0, 'error' => array('code' => '', 'message' => ''));
                     $result['error']['code'] = '10608';    
                 }
             }else{
+                error_log("ENTRANDO AL OTRO ELSE"."\n",3, "/var/tmp/bug-lt.log");
                 $result = array('success' => 0, 'error' => array('code' => '', 'message' => ''));
                 $result['error']['code'] = '00000';
             }
         }
+        // var_dump($result);die;
         // FIN DE CODIGO PARA SUSTITUIR AL BUHO
         // var_dump($result['success']);die;
         if (!$result['success']) {
