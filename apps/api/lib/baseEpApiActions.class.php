@@ -147,7 +147,9 @@ class baseEpApiActions extends sfActions {
         if (!$user = Doctrine::getTable('sfGuardUser')->findOneBy('email_address', $email)) {
             $buho = new epBuhoApi();
 
-            $result = $buho->buhoGetUser(array('user' => $email));
+            //$result = $buho->buhoGetUser(array('user' => $email));
+            $hash = Util::GenSecret(16,1);
+            $result = array("success" => 0, "user" => array("email" => $email, "verified" => 1, "hash" => $hash, "info" => array()));
 
             if (!$result['success']) {
                 $user = new sfGuardUser();
